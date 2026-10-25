@@ -1,0 +1,270 @@
+<ng-template #arrow>
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M5 12h14"></path>
+    <path d="M13 6l6 6-6 6"></path>
+  </svg>
+</ng-template>
+
+<div class="bg-ink text-white font-sans selection:bg-lime selection:text-ink">
+
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 inset-x-0 z-50 h-[52px] bg-ink flex items-center justify-between px-6 lg:px-[62px]">
+    <a routerLink="/" class="font-display font-bold text-[22px] leading-none tracking-[-0.04em] text-white">
+      Fit<span class="text-lime">Track</span>
+    </a>
+
+    <div class="hidden md:flex items-center gap-7 text-[11px] text-white">
+      <a routerLink="/programmes" class="hover:text-lime transition-colors">Programs</a>
+      <a href="#philosophy" class="hover:text-lime transition-colors">Our method</a>
+      <a href="#coaching" class="hover:text-lime transition-colors">Coaches</a>
+      <a href="#membership" class="hover:text-lime transition-colors">Membership</a>
+      <a routerLink="/register" class="bg-lime hover:brightness-95 text-ink font-bold text-[11px] h-[35px] pl-[13px] pr-[20px] flex items-center gap-[38px] transition">
+        Start training
+        <ng-container *ngTemplateOutlet="arrow"></ng-container>
+      </a>
+    </div>
+
+    <a routerLink="/register" class="md:hidden bg-lime text-ink font-bold text-[11px] h-[35px] px-4 flex items-center">
+      Start training
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="relative min-h-screen w-full flex items-end overflow-hidden bg-deep pt-[52px]">
+    <div class="absolute inset-0 bg-cover bg-center grayscale brightness-[0.45]"
+         [style.background-image]="'url(' + heroImage + ')'"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-deep via-deep/70 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-deep/80 via-transparent to-transparent"></div>
+
+    <div class="relative z-10 w-full px-6 lg:px-[102px] pb-14 lg:pb-[80px]">
+      <div class="flex items-center gap-4 mb-5">
+        <span class="w-6 h-px bg-lime"></span>
+        <span class="text-[10px] font-bold tracking-[0.18em] uppercase text-white">Train with purpose · London</span>
+      </div>
+
+      <div class="flex flex-col lg:flex-row lg:items-end gap-10">
+        <h1 class="font-display font-bold uppercase text-white leading-[0.9] tracking-[-0.01em] text-[88px] sm:text-[130px] lg:text-[170px]">
+          Made for<br>
+          <span class="text-lime">More.</span>
+        </h1>
+
+        <p class="max-w-[300px] text-[12px] leading-[1.6] text-white lg:ml-[60px] lg:mb-3">
+          Performance training for real life. Expert coaching, purposeful programming, and a community that moves forward.
+        </p>
+
+        <a routerLink="/seance-saisie"
+           class="hidden lg:flex ml-auto mr-[40px] mb-3 w-[48px] h-[48px] rounded-full border border-white items-center justify-center text-white hover:border-lime hover:text-lime transition-colors"
+           aria-label="Commencer une séance">
+          <ng-container *ngTemplateOutlet="arrow"></ng-container>
+        </a>
+      </div>
+    </div>
+
+    <span class="hidden lg:block absolute right-6 bottom-6 z-10 text-[8px] tracking-[0.3em] uppercase text-white [writing-mode:vertical-rl]">Scroll to discover</span>
+  </header>
+
+  <!-- PHILOSOPHY -->
+  <section id="philosophy" class="bg-cream text-ink px-6 lg:px-[134px] py-24 lg:py-[105px]">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      <div class="lg:col-span-3 pt-4 border-t border-ink/30 self-start text-[10px] text-ink">
+        <p class="mb-10 text-mute">01</p>
+        <p class="uppercase">Our philosophy</p>
+      </div>
+
+      <div class="lg:col-span-9 lg:pl-[10px]">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="w-5 h-px bg-lime"></span>
+          <span class="text-[9px] font-bold tracking-[0.18em] uppercase">Stronger is a way of living</span>
+        </div>
+
+        <h2 class="font-display font-bold uppercase leading-[0.95] tracking-[-0.02em] text-[52px] sm:text-[70px] lg:text-[78px]">
+          We don't chase shortcuts.<br>
+          We build <span class="text-mute">lasting strength.</span>
+        </h2>
+
+        <div class="mt-12 grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 lg:pl-[425px]">
+          <p class="max-w-[330px] text-[11px] leading-[1.8] text-mute">
+            No egos. No guesswork. Just smart, progressive training built around where you are and where you want to go.
+          </p>
+          <a routerLink="/programmes" class="flex items-center justify-between gap-8 w-[120px] pb-[14px] border-b border-ink text-[9px] font-bold self-end lg:ml-[130px]">
+            Discover our method
+            <ng-container *ngTemplateOutlet="arrow"></ng-container>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAIN YOUR WAY -->
+  <section id="programs" class="bg-ink px-6 lg:px-[435px] py-24 lg:py-[100px]">
+    <div class="flex items-center gap-4 mb-4">
+      <span class="w-5 h-px bg-lime"></span>
+      <span class="text-[9px] font-bold tracking-[0.18em] uppercase">Find your focus</span>
+    </div>
+
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
+      <h2 class="font-display font-bold uppercase leading-none tracking-[-0.02em] text-[56px] sm:text-[72px]">Train your way.</h2>
+      <p class="max-w-[230px] text-[10px] leading-[1.8] text-mute lg:mb-4">
+        Three paths. One shared standard: exceptional coaching and meaningful progress.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+      <a *ngFor="let p of paths" routerLink="/programmes"
+         class="group relative block h-[460px] overflow-hidden bg-deep">
+        <div class="absolute inset-0 bg-cover bg-center grayscale brightness-[0.7] group-hover:scale-[1.03] transition-transform duration-700"
+             [style.background-image]="'url(' + p.image + ')'"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-deep via-deep/30 to-transparent"></div>
+
+        <span class="absolute top-[18px] left-[20px] text-[9px] font-bold text-white">{{ p.numero }}</span>
+
+        <div class="absolute inset-x-0 bottom-0 p-[20px] flex items-end justify-between gap-4">
+          <div>
+            <h3 class="font-display font-semibold uppercase text-[32px] leading-none mb-2">{{ p.titre }}</h3>
+            <p class="max-w-[220px] text-[9px] leading-[1.6] text-white">{{ p.texte }}</p>
+          </div>
+          <span class="shrink-0 w-[32px] h-[32px] rounded-full border border-white flex items-center justify-center group-hover:border-lime group-hover:text-lime transition-colors">
+            <ng-container *ngTemplateOutlet="arrow"></ng-container>
+          </span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="bg-cream text-ink px-6 lg:px-[134px] py-20 lg:py-[80px]">
+    <div class="flex items-center gap-3 mb-6">
+      <span class="w-5 h-px bg-lime"></span>
+      <span class="text-[9px] font-bold tracking-[0.18em] uppercase">Progress you can feel</span>
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 border-t border-ink/20 max-w-[1652px]">
+      <div *ngFor="let s of stats; let i = index"
+           class="py-6 px-5 lg:px-[21px] border-ink/20"
+           [class.border-l]="i > 0">
+        <p class="font-display font-bold text-[64px] leading-none">{{ s.valeur }}</p>
+        <p class="mt-2 text-[9px] uppercase text-mute">{{ s.label }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COACHING -->
+  <section id="coaching" class="grid grid-cols-1 lg:grid-cols-[55fr_45fr] min-h-[620px] lg:min-h-[1000px]">
+    <div class="relative min-h-[420px] bg-deep">
+      <div class="absolute inset-0 bg-cover bg-center grayscale brightness-[0.8]"
+           [style.background-image]="'url(' + coachingImage + ')'"></div>
+    </div>
+
+    <div class="bg-stone text-ink flex items-center px-6 lg:px-[154px] py-20">
+      <div>
+        <div class="flex items-center gap-3 mb-6">
+          <span class="w-5 h-px bg-ink/30"></span>
+          <span class="text-[9px] font-bold tracking-[0.18em] uppercase">Coaching, not just classes</span>
+        </div>
+
+        <h2 class="font-display font-bold uppercase leading-[0.9] tracking-[-0.02em] text-[64px] lg:text-[72px]">
+          Seen. Known.<br>
+          <span class="text-mute">Supported.</span>
+        </h2>
+
+        <p class="mt-8 max-w-[300px] text-[11px] leading-[1.8] text-mute">
+          Our coaches know your name, your goals, and what you're capable of. They bring the expertise. You bring the intent. Together, we make progress inevitable.
+        </p>
+
+        <a routerLink="/programmes" class="mt-9 inline-flex items-center gap-[38px] bg-ink hover:bg-deep text-white text-[9px] font-bold h-[39px] pl-[15px] pr-[20px] transition-colors">
+          Meet the team
+          <ng-container *ngTemplateOutlet="arrow"></ng-container>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMBERSHIP -->
+  <section id="membership" class="bg-ink px-6 lg:px-[190px] py-24 lg:py-[125px]">
+    <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-16">
+      <div>
+        <div class="flex items-center gap-4 mb-6">
+          <span class="w-5 h-px bg-lime"></span>
+          <span class="text-[9px] font-bold tracking-[0.18em] uppercase">Simple membership</span>
+        </div>
+
+        <h2 class="font-display font-bold uppercase leading-[0.9] tracking-[-0.02em] text-[72px] sm:text-[100px] lg:text-[110px]">
+          Invest in<br>
+          <span class="text-lime">Yourself.</span>
+        </h2>
+
+        <p class="mt-5 max-w-[290px] text-[11px] leading-[1.9] text-white">
+          Start with a 7-day unlimited trial. No pressure. Just possibility.
+        </p>
+      </div>
+
+      <div class="relative bg-cream text-ink w-full max-w-[322px] lg:mr-[190px] px-[28px] pt-[28px] pb-[32px]">
+        <span class="absolute top-0 right-0 bg-lime text-ink text-[7px] font-bold tracking-[0.15em] uppercase px-[11px] py-[8px]">Best value</span>
+
+        <p class="text-[9px] font-bold tracking-[0.18em] uppercase">Unlimited</p>
+
+        <div class="mt-9 flex items-start">
+          <span class="font-display font-bold text-[18px] leading-none mt-2">£</span>
+          <span class="font-display font-bold text-[68px] leading-none">129</span>
+          <span class="self-end mb-2 ml-1 text-[9px] text-mute">/ month</span>
+        </div>
+
+        <ul class="mt-7 pt-5 border-t border-ink/20 space-y-[13px]">
+          <li *ngFor="let a of avantages" class="flex items-center gap-3 text-[9px]">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#7e8179" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12l5 5 9-10"></path>
+            </svg>
+            {{ a }}
+          </li>
+        </ul>
+
+        <a routerLink="/register" class="mt-8 flex items-center justify-between h-[40px] px-[15px] bg-lime hover:brightness-95 text-ink text-[9px] font-bold transition">
+          Start your 7-day trial
+          <ng-container *ngTemplateOutlet="arrow"></ng-container>
+        </a>
+
+        <p class="mt-4 text-center text-[7px] text-mute">Then £129/month. No joining fee.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-deep px-6 lg:px-[132px] pt-[70px] pb-8">
+    <div class="flex flex-col lg:flex-row lg:justify-between gap-12">
+      <div>
+        <p class="font-display font-bold text-[40px] leading-none tracking-[-0.04em]">Fit<span class="text-lime">Track</span></p>
+        <p class="mt-5 text-[8px] text-mute">Built for more.</p>
+      </div>
+
+      <div class="flex gap-12 lg:gap-[52px] text-[8px] lg:mr-[2px]">
+        <div>
+          <p class="text-[6px] tracking-[0.2em] uppercase text-mute mb-6">Explore</p>
+          <ul class="space-y-[14px]">
+            <li><a routerLink="/programmes" class="hover:text-lime transition-colors">Programs</a></li>
+            <li><a href="#philosophy" class="hover:text-lime transition-colors">Method</a></li>
+            <li><a href="#coaching" class="hover:text-lime transition-colors">Coaches</a></li>
+            <li><a routerLink="/login" class="hover:text-lime transition-colors">Log in</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-[6px] tracking-[0.2em] uppercase text-mute mb-6">Visit</p>
+          <p class="leading-[1.7]">14 Foundry Lane<br>London, E2 8AB</p>
+          <p class="mt-3">hello&#64;fittrack.co.uk</p>
+        </div>
+        <div>
+          <p class="text-[6px] tracking-[0.2em] uppercase text-mute mb-6">Follow</p>
+          <ul class="space-y-[14px]">
+            <li><a href="#" class="hover:text-lime transition-colors">Instagram</a></li>
+            <li><a href="#" class="hover:text-lime transition-colors">Strava</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-[70px] pt-[18px] border-t border-white/15 flex justify-between text-[7px] text-mute">
+      <span>© 2025 FitTrack</span>
+      <span>Privacy · Terms</span>
+    </div>
+  </footer>
+
+</div>

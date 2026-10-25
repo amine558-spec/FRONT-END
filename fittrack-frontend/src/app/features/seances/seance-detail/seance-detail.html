@@ -1,0 +1,138 @@
+<div class="min-h-screen bg-ink text-white px-6 lg:px-[62px] py-10">
+  <div class="max-w-4xl mx-auto space-y-8">
+
+    <a routerLink="/" class="inline-block font-display font-bold text-2xl tracking-[-0.04em]">Fit<span class="text-lime">Track</span></a>
+
+    <div *ngIf="!isSeanceActive" class="bg-cream text-ink p-8">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="w-5 h-px bg-lime"></span>
+        <span class="text-[10px] font-bold tracking-[0.18em] uppercase">Nouvelle séance</span>
+      </div>
+      <h2 class="font-display font-bold uppercase text-5xl leading-none tracking-[-0.02em] mb-8">Démarrer une <span class="text-mute">séance.</span></h2>
+
+      <div *ngIf="errorMessage" class="border border-red-600 text-red-700 text-xs p-3 mb-5">
+        {{ errorMessage }}
+      </div>
+
+      <form [formGroup]="seanceForm" (ngSubmit)="demarrerSeance()" class="space-y-5">
+        <div>
+          <label class="block text-[10px] font-bold uppercase tracking-[0.18em] mb-2">Programme</label>
+          <select formControlName="programmeId"
+            class="w-full px-3 py-3 bg-transparent border border-ink/30 text-ink text-sm focus:outline-none focus:border-ink">
+            <option value="" disabled>Choisis un programme</option>
+            <option *ngFor="let prog of programmes" [value]="prog.id">{{ prog.nom }}</option>
+          </select>
+          <p *ngIf="programmes.length === 0" class="text-xs text-mute mt-2">
+            Aucun programme. <a routerLink="/programmes" class="font-bold text-ink border-b border-ink">Crées-en un d'abord</a>.
+          </p>
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-bold uppercase tracking-[0.18em] mb-2">Date de la séance</label>
+          <input type="date" formControlName="date"
+            class="w-full px-3 py-3 bg-transparent border border-ink/30 text-ink text-sm focus:outline-none focus:border-ink">
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-bold uppercase tracking-[0.18em] mb-2">Type de séance</label>
+          <select formControlName="type"
+            class="w-full px-3 py-3 bg-transparent border border-ink/30 text-ink text-sm focus:outline-none focus:border-ink">
+            <option value="MUSCULATION">🏋️ Force / Musculation</option>
+            <option value="MMA">🥊 Combat / MMA</option>
+          </select>
+        </div>
+
+        <button type="submit" [disabled]="seanceForm.invalid"
+          class="w-full flex items-center justify-between h-[44px] px-4 bg-lime hover:brightness-95 text-ink text-xs font-bold disabled:opacity-50 transition">
+          Commencer l'entraînement
+          <span>→</span>
+        </button>
+      </form>
+    </div>
+
+    <div *ngIf="isSeanceActive" class="space-y-2">
+
+      <div class="bg-deep border border-white/10 p-6 flex justify-between items-center">
+        <div>
+          <span class="text-[10px] text-lime font-bold uppercase tracking-[0.18em]">Séance en cours</span>
+          <h2 class="font-display font-semibold uppercase text-2xl mt-1">Type : {{ seanceForm.value.type }}</h2>
+        </div>
+        <div class="text-right">
+          <span class="text-[10px] text-mute uppercase">Volume total</span>
+          <p class="font-display font-bold text-5xl leading-none text-lime">{{ volumeTotal }} kg</p>
+        </div>
+      </div>
+
+      <div class="bg-cream text-ink p-6">
+        <h3 class="font-display font-semibold uppercase text-2xl mb-5">Saisir une série</h3>
+
+        <div *ngIf="serieMessage" class="border border-red-600 text-red-700 text-xs p-3 mb-4">
+          {{ serieMessage }}
+        </div>
+
+        <form [formGroup]="serieForm" (ngSubmit)="ajouterSerie()" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div>
+            <label class="block text-[10px] font-bold uppercase tracking-[0.18em] mb-2">Exercice</label>
+            <select formControlName="exerciceId"
+              class="w-full px-3 py-3 bg-transparent border border-ink/30 text-ink text-sm focus:outline-none focus:border-ink">
+              <option value="" disabled>Choisis</option>
+              <option *ngFor="let ex of exercices" [value]="ex.id">{{ ex.nom }}</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-[10px] font-bold uppercase tracking-[0.18em] mb-2">Poids (kg)</label>
+            <input type="text" formControlName="poids" placeholder="Ex: 80.5"
+              class="w-full px-3 py-3 bg-transparent border border-ink/30 text-ink text-sm focus:outline-none focus:border-ink">
+            <p *ngIf="serieForm.get('poids')?.invalid && serieForm.get('poids')?.touched" class="text-xs text-red-700 mt-1">
+              Poids invalide (chiffres uniquement).
+            </p>
+          </div>
+
+          <div>
+            <label class="block text-[10px] font-bold uppercase tracking-[0.18em] mb-2">Répétitions</label>
+            <input type="text" formControlName="repetitions" placeholder="Ex: 10"
+              class="w-full px-3 py-3 bg-transparent border border-ink/30 text-ink text-sm focus:outline-none focus:border-ink">
+            <p *ngIf="serieForm.get('repetitions')?.invalid && serieForm.get('repetitions')?.touched" class="text-xs text-red-700 mt-1">
+              Répétitions invalides (entier uniquement).
+            </p>
+          </div>
+
+          <div class="flex items-end">
+            <button type="submit" [disabled]="serieForm.invalid"
+              class="w-full flex items-center justify-between h-[44px] px-4 bg-ink hover:bg-deep text-white text-xs font-bold disabled:opacity-50 transition">
+              Valider la série
+              <span>+</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="bg-deep border border-white/10 overflow-x-auto">
+        <table class="w-full text-left text-sm">
+          <thead class="text-mute uppercase text-[10px] tracking-[0.18em] border-b border-white/15">
+            <tr>
+              <th class="p-4 font-bold">Série #</th>
+              <th class="p-4 font-bold">Poids (kg)</th>
+              <th class="p-4 font-bold">Répétitions</th>
+              <th class="p-4 font-bold">Volume (kg)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let serie of seriesLog; let index = index" class="border-b border-white/10">
+              <td class="p-4 font-display font-semibold text-lime">Série {{ index + 1 }}</td>
+              <td class="p-4">{{ serie.poids }} kg</td>
+              <td class="p-4">{{ serie.repetitions }}</td>
+              <td class="p-4 font-bold text-white">{{ serie.poids * serie.repetitions }} kg</td>
+            </tr>
+            <tr *ngIf="seriesLog.length === 0">
+              <td colspan="4" class="p-6 text-center text-mute text-xs">Aucune série enregistrée pour cette séance.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+</div>

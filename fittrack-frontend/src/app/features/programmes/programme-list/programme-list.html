@@ -1,0 +1,67 @@
+<div class="min-h-screen bg-ink text-white px-6 lg:px-[62px] py-10">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-wrap justify-between items-center gap-4 mb-14">
+      <a routerLink="/" class="font-display font-bold text-2xl tracking-[-0.04em]">Fit<span class="text-lime">Track</span></a>
+      <div class="flex items-center gap-3 text-xs font-bold">
+        <a routerLink="/seance-saisie" class="hover:text-lime transition-colors">Nouvelle séance</a>
+        <a routerLink="/historique" class="hover:text-lime transition-colors">Historique</a>
+        <button (click)="logout()" class="border border-white/40 hover:border-lime hover:text-lime px-4 py-2 transition-colors">
+          Déconnexion
+        </button>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-4 mb-4">
+      <span class="w-5 h-px bg-lime"></span>
+      <span class="text-[10px] font-bold tracking-[0.18em] uppercase">Find your focus</span>
+    </div>
+    <h1 class="font-display font-bold uppercase leading-none tracking-[-0.02em] text-6xl sm:text-7xl mb-10">
+      Mes <span class="text-lime">programmes.</span>
+    </h1>
+
+    <form [formGroup]="programmeForm" (ngSubmit)="createProgramme()" class="flex flex-col sm:flex-row gap-2 mb-10 max-w-xl">
+      <input formControlName="nom" type="text" placeholder="Nom du nouveau programme"
+        class="flex-1 px-3 py-3 bg-deep border border-white/20 text-white text-sm placeholder:text-mute focus:outline-none focus:border-lime">
+      <button type="submit" [disabled]="programmeForm.invalid"
+        class="flex items-center justify-between gap-6 h-[44px] px-4 bg-lime hover:brightness-95 text-ink text-xs font-bold disabled:opacity-50 transition">
+        Créer
+        <span>+</span>
+      </button>
+    </form>
+
+    <div *ngIf="isLoading" class="py-12 text-sm text-mute">
+      Chargement de tes programmes...
+    </div>
+
+    <div *ngIf="errorMessage" class="border border-red-500 text-red-400 text-sm p-4 mb-6">
+      {{ errorMessage }}
+    </div>
+
+    <div *ngIf="!isLoading && programmes.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+      <div *ngFor="let prog of programmes" class="bg-deep p-6 flex flex-col justify-between min-h-[200px] border border-white/10 hover:border-lime transition-colors">
+        <div>
+          <h3 class="font-display font-semibold uppercase text-3xl leading-none mb-3">{{ prog.nom }}</h3>
+          <p *ngIf="prog.dateCreation" class="text-mute text-xs">Créé le {{ prog.dateCreation }}</p>
+        </div>
+
+        <div class="flex justify-between items-center pt-4 mt-6 border-t border-white/15">
+          <span class="text-[9px] text-mute">ID: #{{ prog.id }}</span>
+          <div class="flex gap-2">
+            <button (click)="renameProgramme(prog)"
+              class="border border-white/40 hover:border-lime hover:text-lime px-3 py-1.5 text-xs font-bold transition-colors">
+              Renommer
+            </button>
+            <button (click)="deleteProgramme(prog.id)"
+              class="border border-red-500/60 text-red-400 hover:bg-red-500 hover:text-white px-3 py-1.5 text-xs font-bold transition-colors">
+              Supprimer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!isLoading && programmes.length === 0 && !errorMessage" class="py-12 border border-white/10 text-center">
+      <p class="text-mute text-sm">Aucun programme pour le moment. Crée le premier avec le champ ci-dessus.</p>
+    </div>
+  </div>
+</div>

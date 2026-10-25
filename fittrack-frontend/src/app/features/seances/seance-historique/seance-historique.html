@@ -1,0 +1,57 @@
+<div class="min-h-screen bg-ink text-white px-6 lg:px-[62px] py-10">
+  <div class="max-w-4xl mx-auto space-y-8">
+    <a routerLink="/" class="inline-block font-display font-bold text-2xl tracking-[-0.04em]">Fit<span class="text-lime">Track</span></a>
+
+    <h1 class="font-display font-bold uppercase leading-none tracking-[-0.02em] text-6xl">
+      Historique des <span class="text-lime">séances.</span>
+    </h1>
+
+    <div *ngIf="isLoading" class="py-12 text-sm text-mute">
+      Chargement de l'historique...
+    </div>
+
+    <div *ngIf="errorMessage" class="border border-red-500 text-red-400 text-sm p-4">
+      {{ errorMessage }}
+    </div>
+
+    <div *ngIf="!isLoading && !errorMessage" class="bg-deep border border-white/10 overflow-hidden">
+      <table class="w-full text-left text-sm">
+        <thead class="text-mute uppercase text-[10px] tracking-[0.18em] border-b border-white/15">
+          <tr>
+            <th class="p-4 font-bold">Date</th>
+            <th class="p-4 font-bold">Type</th>
+            <th class="p-4 font-bold">Volume total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let seance of paginatedHistorique" class="border-b border-white/10">
+            <td class="p-4 font-medium text-white">{{ seance.date }}</td>
+            <td class="p-4">
+              <span [class]="seance.type === 'MUSCULATION' ? 'bg-lime text-ink' : 'bg-white text-ink'"
+                class="px-2 py-1 text-[9px] font-bold tracking-[0.15em] uppercase">
+                {{ seance.type }}
+              </span>
+            </td>
+            <td class="p-4 font-display font-semibold text-lime text-lg">{{ seance.volumeTotal != null ? seance.volumeTotal + ' kg' : '—' }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="p-4 border-t border-white/15 flex justify-between items-center">
+        <span class="text-[10px] text-mute">
+          Page {{ currentPage }} sur {{ totalPages }}
+        </span>
+        <div class="flex space-x-2">
+          <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1"
+            class="px-3 py-1.5 border border-white/40 hover:border-lime hover:text-lime text-xs font-bold disabled:opacity-40 transition-colors">
+            Précédent
+          </button>
+          <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages"
+            class="px-3 py-1.5 border border-white/40 hover:border-lime hover:text-lime text-xs font-bold disabled:opacity-40 transition-colors">
+            Suivant
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
